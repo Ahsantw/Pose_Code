@@ -1,6 +1,7 @@
 # Training
 
 ### Requirement
+* Python 3.8
 * ultralytics
 
 ### Dataset Path Settings
