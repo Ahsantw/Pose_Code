@@ -2,6 +2,7 @@
 
 ### Requirement
 * Pandas
+* Python 3.8
 * cv2
 * numpy
 * pycocotools
