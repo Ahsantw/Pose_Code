@@ -15,6 +15,8 @@ from alphapose.models import builder
 from alphapose.utils.presets import SimpleTransform, SimpleTransform3DSMPL
 from alphapose.utils.writer import DataWriter
 from alphapose.utils.writer import DEFAULT_VIDEO_SAVE_OPT as video_save_opt
+from alphapose.utils.transforms import get_func_heatmap_to_coord
+from alphapose.utils.pPose_nms import pose_nms, write_json
 
 
 """----------------------------- Demo options -----------------------------"""
@@ -26,7 +28,7 @@ parser.add_argument('--checkpoint', type=str, required=True,
 parser.add_argument('--save_img', default=False, action='store_true',
                     help='save result as image')
 parser.add_argument('--outdir', dest='outputpath',
-                    help='output-directory', default="examples/res/")
+                    help='output-directory', default="./")
 parser.add_argument('--sp', default=False, action='store_true',
                     help='Use single process for pytorch')
 parser.add_argument('--vis', default=False, action='store_true',
@@ -39,7 +41,7 @@ parser.add_argument('--min_box_area', type=int, default=0,
                     help='min box area to filter out')
 parser.add_argument('--detbatch', type=int, default=2,
                     help='detection batch size PER GPU')
-parser.add_argument('--posebatch', type=int, default=8,
+parser.add_argument('--posebatch', type=int, default=2,
                     help='pose estimation maximum batch size PER GPU')
 parser.add_argument('--eval', dest='eval', default=False, action='store_true',
                     help='save the result json as coco format, using image index(int) instead of image name(str)')
@@ -100,8 +102,9 @@ batchSize = args.posebatch
 
 _input_size = cfg.DATA_PRESET.IMAGE_SIZE
 _output_size = cfg.DATA_PRESET.HEATMAP_SIZE
-
+hm_size = cfg.DATA_PRESET.HEATMAP_SIZE
 _sigma = cfg.DATA_PRESET.SIGMA
+norm_type = cfg.LOSS.get('NORM_TYPE', None)
 
 if cfg.DATA_PRESET.TYPE == 'simple':
     pose_dataset = builder.retrieve_dataset(cfg.DATASET.TRAIN)
@@ -114,6 +117,7 @@ if cfg.DATA_PRESET.TYPE == 'simple':
 
 if __name__ == "__main__":
 
+    eval_joints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
 
     # Create a VideoCapture object and read from input file
@@ -131,14 +135,17 @@ if __name__ == "__main__":
     video_save_opt = {
     'savepath': args.output_video_name,
     'fourcc': cv2.VideoWriter_fourcc(*'mp4v'),
-    'fps': 30,
+    'fps': 25,
     'frameSize': (width, height)
     }
     writer = DataWriter(cfg, args, save_video=True, video_save_opt=video_save_opt, queueSize=args.qsize).start()
+    heatmap_to_coord = get_func_heatmap_to_coord(cfg)
     # Read until video is completed
     while(cap.isOpened()):
         Frame_Number += 1
         print(Frame_Number)
+        if Frame_Number>=20:
+            break
         # Capture frame-by-frame
         ret, frame = cap.read()
         if ret == True:
@@ -155,7 +162,7 @@ if __name__ == "__main__":
                 inps[i], cropped_box = transformation.test_transform(orig_img, box)
                 cropped_boxes[i] = torch.FloatTensor(cropped_box)
             if boxes is None or boxes.nelement() == 0:
-                writer.save(None, None, None, None, None, orig_img, str(Frame_Number))
+                #writer.save(None, None, None, None, None, orig_img, str(Frame_Number))
                 continue
             # Pose Estimation
             inps = inps.to(args.device)
@@ -177,12 +184,7 @@ if __name__ == "__main__":
             hm = torch.cat(hm)
             hm = hm.detach().cpu()
 
-            # for box in boxes:
-            #     cv2.rectangle(frame,(int(box[0]),int(box[1])), (int(box[2]),int(box[3])), (255,255,255), 2)
 
-            # out.write(frame)
-            
-            #writer.save(boxes.cpu(), scores.cpu(), ids.cpu(), hm, cropped_boxes.cpu(), orig_img, str(Frame_Number)+'.jpg')  
             writer.save(boxes, scores, ids, hm, cropped_boxes, orig_img, str(Frame_Number))   
         # Break the loop
         else: 
@@ -191,9 +193,9 @@ if __name__ == "__main__":
     # When everything done, release the video capture object
     cap.release()
     while(writer.running()):
-        time.sleep(1)
+        time.sleep(1000)
         print('===========================> Rendering remaining ' + str(writer.count()) + ' images in the queue...', end='\r')
-        writer.stop()
+    writer.stop()
     writer.terminate()
     writer.clear_queues()
      
