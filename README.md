@@ -31,7 +31,11 @@ The data sets we used were sourced from reputable sources such as COCO, MPII, Ka
 
 The configuration employing YOLOv8n detection model for transfer learning yielded superior results. Employing a batch size of 16 and training over 10 epochs, with an initial learning rate set at 0.01, resulted in the attainment of the most favorable outcomes. We trained approximately 30K high resolution images and 400 bad quality images acquired randomly and labeled.
 
-Custom Training Graphs.
+Precision and Recall Graphs.
 ![graph1](https://github.com/Ahsantw/Pose_Code/blob/main/sample/output.png)
+
+Training and Validation Graphs.
+
+
 
 Please use [code](https://github.com/Ahsantw/Pose_Code/tree/main/Training_code) for the training the human detector model.
