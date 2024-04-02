@@ -4,6 +4,7 @@ The code has three major parts.
 * Video Inference for Pose Estimation.
 * Data Preparation for Human Detector.
 * Training of Human Detector.
+* Image Enhancement.
 
 ### Flowchart
 ![0](https://github.com/Ahsantw/Pose_Code/blob/main/sample/sample_block_diagram.png)
@@ -17,6 +18,11 @@ The code has three major parts.
 The human detector model will predict human from the input frame and then pass it to pose estimation model. The flow is provided in diagram below.
 ![4](https://github.com/Ahsantw/Pose_Code/blob/main/sample/sample_process.png)
 Please follow the [guide](https://github.com/Ahsantw/Pose_Code/tree/main/Inference) for video inference on your own video.
+
+### Image Enhancement
+Multiple image enhancement technique i.e Histogram, Nafnet etc were tested and implemented. A comparision between input image and enhanceed image is shown below.
+
+![5](https://github.com/Ahsantw/Pose_Code/blob/main/sample/image_enhancement.png)
 
 ### Dataset Preparation
 The data sets we used were sourced from reputable sources such as COCO, MPII, Kaggle, GitHub, and included CCTV footages from various origins. Please follow the steps mentioned in the [readme](https://github.com/Ahsantw/Pose_Code/blob/main/Data_Preparation/README.md) to prepare your dataset in coco and yolo format.
