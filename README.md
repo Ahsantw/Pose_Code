@@ -14,7 +14,8 @@ The code has three major parts.
 ![2](https://github.com/Ahsantw/Pose_Code/blob/main/sample/2.gif)
 
 ### Video Inference
-The human detector model will predict human from the input frame and then pass to pose estimation model. The flow is provided in diagram below.
+The human detector model will predict human from the input frame and then pass it to pose estimation model. The flow is provided in diagram below.
+![4](https://github.com/Ahsantw/Pose_Code/blob/main/sample/sample_process.png)
 Please follow the [guide](https://github.com/Ahsantw/Pose_Code/tree/main/Inference) for video inference on your own video.
 
 ### Dataset Preparation
