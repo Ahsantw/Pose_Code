@@ -36,6 +36,6 @@ Precision and Recall Graphs.
 
 Training and Validation Graphs.
 
-
+![graph2](https://github.com/Ahsantw/Pose_Code/blob/main/sample/results.png)
 
 Please use [code](https://github.com/Ahsantw/Pose_Code/tree/main/Training_code) for the training the human detector model.
