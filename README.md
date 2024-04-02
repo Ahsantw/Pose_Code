@@ -24,8 +24,10 @@ Multiple image enhancement technique i.e Histogram, Nafnet etc were tested and i
 
 ![5](https://github.com/Ahsantw/Pose_Code/blob/main/sample/image_enhancement.png)
 
+Follow [guide](https://github.com/Ahsantw/Pose_Code/tree/main/image_enhancement) to enhance your own image.
+
 ### Dataset Preparation
-The data sets we used were sourced from reputable sources such as COCO, MPII, Kaggle, GitHub, and included CCTV footages from various origins. Please follow the steps mentioned in the [readme](https://github.com/Ahsantw/Pose_Code/blob/main/Data_Preparation/README.md) to prepare your dataset in coco and yolo format.
+The data sets we used were sourced from reputable sources such as COCO, MPII, Kaggle, GitHub, and included CCTV footages from various origins. Please follow the steps mentioned in the [readme](https://github.com/Ahsantw/Pose_Code/blob/main/Data_Preparation) to prepare your dataset in coco and yolo format.
 
 ### Training.
 
