@@ -144,8 +144,6 @@ if __name__ == "__main__":
     while(cap.isOpened()):
         Frame_Number += 1
         print(Frame_Number)
-        if Frame_Number>=20:
-            break
         # Capture frame-by-frame
         ret, frame = cap.read()
         if ret == True:
