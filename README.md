@@ -24,8 +24,6 @@ Please follow the steps mentioned in the [readme](https://github.com/Ahsantw/Pos
 ### Training.
 
 Custom Training Graphs.
-![graph1](https://github.com/Ahsantw/Pose_Code/blob/main/sample/P_curve.png)
-![graph2](https://github.com/Ahsantw/Pose_Code/blob/main/sample/R_curve.png)
-![graph3](https://github.com/Ahsantw/Pose_Code/blob/main/sample/PR_curve.png)
+![graph1](https://github.com/Ahsantw/Pose_Code/blob/main/sample/output.png)
 
 Please use [code](https://github.com/Ahsantw/Pose_Code/tree/main/Training_code) for the training the human detector model.
