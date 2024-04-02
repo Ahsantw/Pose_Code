@@ -5,9 +5,13 @@ The code has three major parts.
 * Data Preparation for Human Detector.
 * Training of Human Detector.
 
+### Flowchart
+![0](https://github.com/Ahsantw/Pose_Code/blob/main/sample/sample_block_diagram.png)
+
+
 ### Sample Output.
-![Image1](https://github.com/Ahsantw/Pose_Code/blob/main/sample/0003.jpg)
-![Image2](https://github.com/Ahsantw/Pose_Code/blob/main/sample/0009.jpg)
+![1](https://github.com/Ahsantw/Pose_Code/blob/main/sample/1.gif)
+![2](https://github.com/Ahsantw/Pose_Code/blob/main/sample/2.gif)
 
 ### Video Inference
 
